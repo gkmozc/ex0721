@@ -1,0 +1,83 @@
+public class Example0721 {
+
+    
+    public static void main(String[] args) {
+    Scanner input = new Scanner(System.in); 
+
+		
+		System.out.print("Düşecek top sayısını girin: ");
+		int dus = input.nextInt();
+
+		
+		System.out.print("Slot sayısını girin: ");
+		int cıv = input.nextInt() - 1;
+
+		String[] path = new String[cıv * dus];
+		int[] balls = new int[cıv]; 
+
+		int Rs = 0; 
+		for (int i = 0; i < path.length; i++) {
+			path[i] = getRandomPath();
+
+			
+			if (path[i] == "R") {
+				Rs++; 
+			}
+
+			
+			if ((i + 1) % cıv == 0) {
+				balls[Rs]++; 
+				Rs = 0;
+			}
+		}	
+
+		
+		print(path, cıv);
+		print(balls);
+
+	}
+
+	
+	public static String getRandomPath() {
+		if ((int)(Math.random() * 2) == 0)
+			return "L";
+		else
+			return "R";
+	}
+
+	
+	public static void print(String[] list, int n) {
+		System.out.println();
+		for (int i = 0; i < list.length; i++)
+			System.out.print(((i + 1) % n == 0) ? list[i] + "\n" : list[i]);
+	}
+
+	
+	public static void print(int[] list) {
+		int max = max(list);
+
+		while (max > 0) {
+			System.out.println();
+			for (int i = 0; i < list.length; i++) {
+				if (list[i] >= max) {
+					System.out.print("O");
+				}
+				else
+					System.out.print(" ");
+			}
+			max--;
+		}
+		System.out.println();
+	}
+
+	
+	public static int max(int[] list) {
+		int max = list[0];
+
+		for (int i = 1; i < list.length; i++) {
+			if (list[i] > max)
+				max = list[i];
+		}
+		return max;
+	}
+}
